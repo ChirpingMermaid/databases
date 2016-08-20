@@ -2,8 +2,7 @@ var app = {
 
   //TODO: The current 'handleUsernameClick' function just toggles the class 'friend'
   //to all messages sent by the user
-  // server: 'https://api.parse.com/1/classes/messages/',
-  server: 'http://127.0.0.1:3000/classes/messages/',
+  server: 'http://127.0.0.1:8080/classes/messages/',
   username: 'anonymous',
   roomname: 'lobby',
   messages: [],
@@ -41,14 +40,16 @@ var app = {
         order: '-createdAt'
       },
       success: function(data) {
-        if(!data.results || !data.results.length) { return; }
+        console.log(data);
+        if (!data.results || !data.results.length) { return; }
 
         app.messages = data.results;
 
         var mostRecentMessage = app.messages[app.messages.length - 1];
+        console.log("objectId!!!!!!!!!!!!!! ", mostRecentMessage.id);
 
-        if (mostRecentMessage.objectId !== app.lastMessageId) {
-          app.lastMessageId = mostRecentMessage.objectId;
+        if (mostRecentMessage.id !== app.lastMessageId) {
+          app.lastMessageId = mostRecentMessage.id;
 
           app.renderMessages(app.messages);
           app.renderRoomList(app.messages);
@@ -135,7 +136,7 @@ var app = {
     if (messages) {
       messages.forEach(function(message) {
         var roomname = message.roomname;
-        if(roomname && !rooms[roomname]) {
+        if (roomname && !rooms[roomname]) {
           app.renderRoom(roomname);
 
           rooms[roomname] = true;

@@ -11,7 +11,7 @@ describe('Persistent Node Chat Server', function() {
   beforeEach(function(done) {
     dbConnection = mysql.createConnection({
       user: 'root',
-      password: 'hr47',
+      password: '',
       database: 'chat'
     });
     dbConnection.connect();
@@ -21,6 +21,7 @@ describe('Persistent Node Chat Server', function() {
     /* Empty the db table before each test so that multiple tests
      * (or repeated runs of the tests) won't screw each other up: */
     dbConnection.query('truncate ' + tablename, done);
+    console.log('truncate ' + tablename);
   });
 
   afterEach(function() {
