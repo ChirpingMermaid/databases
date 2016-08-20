@@ -11,11 +11,11 @@ module.exports = {
         // 'select users.name, messages.message from users, messages ' +  
         // 'where messages.user_ID = users.id and ', 
         function(err, rows) {
-        if (err) {
-          throw err;
-        }
-        callback(rows);
-      });
+          if (err) {
+            throw err;
+          }
+          callback(rows);
+        });
 
 
     }, // a function which produces all the messages
